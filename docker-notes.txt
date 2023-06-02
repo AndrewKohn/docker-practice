@@ -1,0 +1,84 @@
+Virtualization software that makes developing and deploying applications much easier.
+
+Packages application with all necessary dependencies, configs, system tools, and runtime. 
+
+Portable artifact, easily shared & distributed.
+
+---
+
+Docker Images vs Docker Containers
+
+images:
+- An executable application artifact
+- Includes app source code, but also complete environment configuration
+- Add envieronment variables, create directories, files, etc...
+
+
+Containers:
+- Running instance of an image.
+- You may run multiple containers from one image.
+
+
+---
+
+Useful docker CLI commands
+``` $ docker images ```
+- Lists of local images
+
+``` $ docker ps ```
+- List of local (running) containers
+
+``` $ docker ps -a ```
+- List of all local containers
+
+``` $ docker pull [NAME]:[TAG] ```
+- downloads the image of the named registry.  Image tag can be specified for a certain version, else it can be left empty to download the latest version.
+
+``` $ docker run [NAME]:[TAG] ```
+- CREATES a container from the given image and starts it.
+
+``` $ docker run -d [NAME]:[TAG] ```
+- Creates a container from the given image and starts it.  The container will run in the background.  Will print the container id and then detaches the docker process from the terminal.
+
+``` $ docker logs [CONTAINER ID] ```
+- Will print out application logs to the container.
+
+``` $ docker stop [OPTIONS] CONTAINER [CONTAINER...] ``` 
+- Stops one or more containers
+
+``` $ docker run -p [LOCAL_PORT]:[CONTAINER_PORT] [NAME]:[TAG] ```
+- ex. -p 9000:80.  Will allow user access to the container in port 9000.  Note: only one service may run on a specific port on the host (for this example, only one service can run on port 9000).
+
+``` $ docker run --name [CONTAINER_NAME] [NAME]:[TAG] ```
+- CREATES a container from the given image and starts it.  The container will now have a user-selected name rather than a random one.
+
+``` $ ^C ```
+- exits and container process is shut down
+
+---
+
+Docker Registries
+
+- A storage & distribution system for docker images.
+- Official images available from applications like Redis, Mongo, Postgres, etc..
+- Official images are maintained by the software authors or in collaboration w/ the docker community.
+- Docker hosts one of the biggest docker registry: Docker Hub
+
+Registry vs Repository
+
+AWS ECR 
+Docker registry:
+- A service providing storage
+- Collection of repositories.
+
+Docker repository:
+Collection of related images with same name but different versions.
+
+---
+
+Container port vs host port
+
+- App inside container runs in an isolated docker network.
+- Expose the container port to the host (the machine the container runs on).
+
+Port Binding: Bind the container's port to the host's port to make the service available to the outside world.
